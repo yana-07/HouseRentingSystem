@@ -15,7 +15,43 @@ namespace HouseRentingSystem.Core.Services
             this.repo = _repo;
         }
 
-        public async Task<IEnumerable<HouseHomeModel>> GetLastThreeHouses()
+        public async Task<IEnumerable<HouseCategoryModel>> AllCategoriesAsync()
+        {
+            return await repo.AllReadonly<Category>()
+                .OrderBy(c => c.Name)
+                .Select(c => new HouseCategoryModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                })
+                .ToListAsync();
+        }
+
+        public async Task<bool> CategoryExistsAsync(int categoryId)
+            => await repo.AllReadonly<Category>()
+                         .AnyAsync(c => c.Id == categoryId);
+
+        public async Task<int> CreateAsync(HouseModel model, int agentId)
+        {
+            var house = new House
+            {
+                Title = model.Title,
+                Address = model.Address,    
+                CategoryId = model.CategoryId,
+                Description = model.Description,
+                ImageUrl = model.ImageUrl,
+                PricePerMonth = model.PricePerMonth,
+                AgentId = agentId
+            };
+
+            await repo.AddAsync(house);
+
+            await repo.SaveChangesAsync();
+
+            return house.Id;
+        }
+
+        public async Task<IEnumerable<HouseHomeModel>> GetLastThreeHousesAsync()
         {
             return await repo.AllReadonly<House>()
                 .OrderByDescending(h => h.Id)
