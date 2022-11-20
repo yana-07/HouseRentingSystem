@@ -11,5 +11,14 @@ namespace HouseRentingSystem.Core.Contracts
         Task<bool> CategoryExistsAsync(int categoryId);
 
         Task<int> CreateAsync(HouseModel model, int agentId);
+
+        Task<HousesQueryModel> AllAsync(
+            string? category = null,
+            string? searchTerm = null,
+            HouseSorting sorting = HouseSorting.Newest,
+            int currentPage = 1,
+            int housesPerPage = 1);
+
+        Task<IEnumerable<string>> AllCategoriesNamesAsync();
     }
 }
