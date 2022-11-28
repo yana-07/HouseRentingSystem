@@ -4,6 +4,7 @@ using HouseRentingSystem.Core.Models.House;
 using HouseRentingSystem.Infrastructure.Data;
 using HouseRentingSystem.Infrastructure.Data.Common;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HouseRentingSystem.Core.Services
 {
@@ -11,13 +12,16 @@ namespace HouseRentingSystem.Core.Services
     {
         private readonly IRepository repo;
         private readonly IGuard guard;
+        private readonly ILogger logger;
 
         public HouseService(
             IRepository _repo,
-            IGuard _guard)
+            IGuard _guard,
+            ILogger<HouseService> _logger)
         {
             repo = _repo;
             guard = _guard;
+            logger = _logger;
         }
 
         public async Task<HousesQueryModel> AllAsync(string? category = null, string? searchTerm = null, HouseSorting sorting = HouseSorting.Newest, int currentPage = 1, int housesPerPage = 1)
@@ -143,9 +147,16 @@ namespace HouseRentingSystem.Core.Services
                 AgentId = agentId
             };
 
-            await repo.AddAsync(house);
-
-            await repo.SaveChangesAsync();
+            try
+            {
+                await repo.AddAsync(house);
+                await repo.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(nameof(CreateAsync), ex);
+                throw new ApplicationException("Database failed to save info.", ex);
+            }
 
             return house.Id;
         }

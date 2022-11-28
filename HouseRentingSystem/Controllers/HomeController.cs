@@ -14,6 +14,7 @@ namespace HouseRentingSystem.Controllers
             this.houseService = _houseService;
         }
 
+        //[ResponseCache(Duration = 60)]
         public async Task<IActionResult> Index()
         {
             var model = await this.houseService.GetLastThreeHousesAsync();
