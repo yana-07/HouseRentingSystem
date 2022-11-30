@@ -30,7 +30,8 @@
 
                 <div class="carousel-caption d-none d-md-block">
                     <h5>
-                        <a class="btn btn-primary" asp-controller="House" asp-action="Details" asp-route-id="@house.Id"> @house.Title</a>
+                        <a class="btn btn-primary" asp-controller="House" asp-action="Details" 
+                           asp-route-id="@house.Id" asp-route-information="@house.GetInformation()"> @house.Title</a>
                     </h5>
                 </div>
             </div>
@@ -50,17 +51,20 @@
 <div class="mb-5"></div>
 <div class="row">
     <div class="col-12 text-center">
+        <button class="btn btn-primary" id="statistics-button">Show Statistics</button>
     </div>
 </div>
-<button class="btn btn-primary" id="statistics-button">Show Statistics</button>
 <div class="mt-4 p-5 bg-light d-none" id="statistics">
-    <h2 class="col-md-6 text-center" id="total-houses"></h2>
-    <h2 class="col-md-6 text-center" id="total-rents"></h2>
+    <div class="row">
+        <h2 class="col-md-6 text-center" id="total-houses"></h2>
+        <h2 class="col-md-6 text-center" id="total-rents"></h2>
+    </div>
 </div>
+<form id="anti-forgery-form" method="post"></form>
 @section Scripts {
     <script>
         $('#statistics-button').on('click', ev => {
-            $.get('https://localhost:7035/api/statistics', (data) => {
+            $.get('https://localhost:7277/api/statistics', (data) => {
                 $('#total-houses').text(data.totalHouses + "Houses");
                 $('#total-rents').text(data.totalRents + " Rents");
                 $('#statistics').removeClass('d-none');
