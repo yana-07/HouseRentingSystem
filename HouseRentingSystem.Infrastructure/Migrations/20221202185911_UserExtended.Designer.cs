@@ -4,6 +4,7 @@ using HouseRentingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseRentingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221202185911_UserExtended")]
+    partial class UserExtended
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,11 +78,6 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -134,16 +131,15 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         {
                             Id = "dea12856-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4bc9fcf5-c988-46d4-acf2-8c87bf393c65",
+                            ConcurrencyStamp = "f8ee8104-68af-454e-b71c-793fefccd620",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
-                            IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "agent@mail.com",
                             NormalizedUserName = "agent@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGNieXJIar+NMG660OHr7/aI9MOV+qiJbBknwk044o3KSjuPyekBqMsdoN6vyTis9A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGptBiGd7/RCSHdyncna6ojBQJOZY8Qqh0BBxFB0dVCjF+GQlMvs9T6+o3zSLG/RDg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "51c93bb9-a202-4e42-a780-1b9c01eaf292",
+                            SecurityStamp = "05819a88-dd5d-479b-9289-e794cd4c444c",
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
                         },
@@ -151,16 +147,15 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "690bc3bf-59e5-47b3-bf62-75d1a17d1308",
+                            ConcurrencyStamp = "208c3cc6-6e31-4ef2-b0d3-55d9145d8383",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
-                            IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFl5RcqWg/CBOfOtYaSFy/1XrQLDxHs93uj+Cphw3W59Wt+QWT6fa7JiKZyyOMoKsg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDZJRWZQnwhQ5mC4GbF/5N2DrYIjJFq4p401bRGVfsLfLG4WotevnG+TE/Byg9UCyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bb14a453-2dc4-48f8-b87f-56eb496fc0df",
+                            SecurityStamp = "ef3cc7e7-5ba8-498c-aae2-46e06a893cc3",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         });
