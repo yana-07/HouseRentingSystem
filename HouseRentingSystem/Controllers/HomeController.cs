@@ -2,6 +2,7 @@
 using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using static HouseRentingSystem.Areas.Admin.Constants.AdminConstants;
 
 namespace HouseRentingSystem.Controllers
 {
@@ -17,7 +18,7 @@ namespace HouseRentingSystem.Controllers
         //[ResponseCache(Duration = 60)]
         public async Task<IActionResult> Index()
         {
-            if (User.IsInRole("Administrator"))
+            if (User.IsInRole(AdminRoleName))
             {
                 return RedirectToAction("Index", "Admin", new { area = "Admin" });
             }
